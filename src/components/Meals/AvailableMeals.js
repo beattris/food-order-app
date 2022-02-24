@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // TO USE ASYNC/AWAIT IN useEffect, CREATE A FUNCTION THAT HOLDS THE PROMISE, THEN CALL THE FUNCTION INSIDE OF useEffect.
@@ -23,10 +24,19 @@ const AvailableMeals = () => {
         });
       }
       setMeals(loadedMeals);
+      setIsLoading(false);
     }
     // CALLING THE FUNCTION
     fetchMeals();
-  }, [])
+  }, []);
+
+  if(isLoading){
+    return(
+      <section className={styles.MealsLoading}>
+        <p>loading...</p>
+      </section>
+    )
+  }
 
   const mealsList = meals.map((meal) => (
     <MealItem
