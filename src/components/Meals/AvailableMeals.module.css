@@ -4,9 +4,23 @@
   margin: 2rem auto;
   animation: meals-appear 1s ease-out forwards;
 }
-.MealsLoading{
+.MealsLoading {
   text-align: center;
   color: white;
+}
+
+.MealsError {
+  text-align: center;
+  max-width: 45rem;
+  width: 90%;
+  margin: auto;
+  margin-top: 15px;
+  position: relative;
+  background-color: white;
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 1px 18px 10px rgb(0 0 0 / 25%);
+  color: red;
 }
 
 .meals ul {

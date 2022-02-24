@@ -6,11 +6,17 @@ import { useEffect, useState } from "react";
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [httpError, setHttpError] = useState();
 
   useEffect(() => {
     // TO USE ASYNC/AWAIT IN useEffect, CREATE A FUNCTION THAT HOLDS THE PROMISE, THEN CALL THE FUNCTION INSIDE OF useEffect.
     const fetchMeals = async () => {
-      const response = await fetch('https://food-order-app-10c85-default-rtdb.firebaseio.com/meals.json');
+      const response = await fetch('https://food-order-app-10c85-default-rtdb.firebaseio.com/meals');
+
+      if (!response.ok){
+        throw new Error('Something went wrong')
+      };
+
       const responseData = await response.json();
 
       const loadedMeals = [];
@@ -27,13 +33,24 @@ const AvailableMeals = () => {
       setIsLoading(false);
     }
     // CALLING THE FUNCTION
-    fetchMeals();
+    fetchMeals().catch ((error) => {
+      setIsLoading(false);
+      setHttpError(error.message);
+    });
   }, []);
 
   if(isLoading){
     return(
       <section className={styles.MealsLoading}>
         <p>loading...</p>
+      </section>
+    )
+  }
+
+  if(httpError){
+    return(
+      <section className={styles.MealsError}>
+        <p>{httpError}</p>
       </section>
     )
   }
