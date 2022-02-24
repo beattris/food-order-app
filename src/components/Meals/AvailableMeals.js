@@ -11,7 +11,7 @@ const AvailableMeals = () => {
   useEffect(() => {
     // TO USE ASYNC/AWAIT IN useEffect, CREATE A FUNCTION THAT HOLDS THE PROMISE, THEN CALL THE FUNCTION INSIDE OF useEffect.
     const fetchMeals = async () => {
-      const response = await fetch('https://food-order-app-10c85-default-rtdb.firebaseio.com/meals');
+      const response = await fetch('https://food-order-app-10c85-default-rtdb.firebaseio.com/meals.json');
 
       if (!response.ok){
         throw new Error('Something went wrong')
